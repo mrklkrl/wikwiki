@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia Path Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+        }
+        #rules {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #main {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 92px);
+        }
+        #path-container {
+            width: 20%;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        #game-container {
+            width: 80%;
+            display: flex;
+        }
+        iframe {
+            width: 50%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Wikipedia Path Game</h1>
+        <div id="rules">
+            Reach the <span id="target-page"></span> page by clicking links on the <span id="start-page"></span> page. Your score is the number of clicks.
+        </div>
+    </div>
+    <div id="main">
+        <div id="path-container">
+            <h2>Path</h2>
+            <div id="path"></div>
+        </div>
+        <div id="game-container">
+            <iframe id="left-iframe"></iframe>
+            <iframe id="right-iframe"></iframe>
+        </div>
+    </div>
+    <script src="wikiwiki.js"></script>
+</body>
+</html>
