@@ -53,18 +53,60 @@
             }
             #path-container {
                 width: 100%;
-                height: 20%;
+                height: auto;
                 border-right: none;
                 border-bottom: 1px solid #ccc;
+                display: flex;
+                justify-content: center;
+                padding: 10px 0;
             }
             #game-container {
                 width: 100%;
-                height: 80%;
                 flex-direction: column;
+                overflow-y: auto;
             }
             iframe {
                 width: 100%;
                 height: 50%;
+            }
+        }
+        @media (max-width: 480px) {
+            #main {
+                flex-direction: column;
+            }
+            #path-container {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+                display: none;
+            }
+            #game-container {
+                width: 100%;
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            iframe {
+                width: 100%;
+                height: 45%;
+            }
+            #path-button {
+                display: block;
+                width: 100%;
+                text-align: center;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 0;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            #path-mobile {
+                display: none;
+                width: 100%;
+                background-color: #f8f8f8;
+                padding: 10px;
+                overflow-y: auto;
             }
         }
     </style>
@@ -81,11 +123,26 @@
             <h2>Path</h2>
             <div id="path"></div>
         </div>
+        <button id="path-button" onclick="togglePath()">Show Path</button>
+        <div id="path-mobile">
+            <h2>Path</h2>
+            <div id="path-mobile-content"></div>
+        </div>
         <div id="game-container">
             <iframe id="left-iframe"></iframe>
             <iframe id="right-iframe"></iframe>
         </div>
     </div>
-    <script src="wikiwiki.js"></script>
+    <script src="game.js"></script>
+    <script>
+        function togglePath() {
+            const pathMobile = document.getElementById('path-mobile');
+            if (pathMobile.style.display === 'none' || pathMobile.style.display === '') {
+                pathMobile.style.display = 'block';
+            } else {
+                pathMobile.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
