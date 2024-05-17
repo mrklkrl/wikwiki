@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const leftIframe = document.getElementById('left-iframe');
     const rightIframe = document.getElementById('right-iframe');
     const pathDiv = document.getElementById('path');
-    const targetPageSpan = document.getElementById('target-page');
-    const startPageSpan = document.getElementById('start-page');
+    const targetPageButton = document.getElementById('target-page-button');
+    const startPageButton = document.getElementById('start-page-button');
     
     let path = [];
     let clickCount = 0;
@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function() {
             rightIframe.srcdoc = rightContent;
 
             // Update the instructions with the page titles
-            targetPageSpan.textContent = targetTitle;
-            startPageSpan.textContent = rightTitle;
+            targetPageButton.textContent = targetTitle;
+            startPageButton.textContent = rightTitle;
             
             pathDiv.innerHTML = `Start Page: ${rightTitle}`;
             path.push(rightTitle);
@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (event.target.tagName === 'A' && event.target.href.includes('/wiki/')) {
                 event.preventDefault();
                 const newTitle = event.target.getAttribute('href').replace('/wiki/', '');
+                console.log(`Navigating to: ${newTitle}`);
                 
                 let newContent = await fetchPageContent(newTitle);
                 newContent = fixImageUrls(newContent);
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function checkWinCondition(currentTitle) {
+        console.log(`Checking win condition: ${currentTitle} === ${targetTitle}`);
         if (currentTitle === targetTitle) {
             alert(`Congratulations! You've reached the target page in ${clickCount} clicks.`);
             showNotification();
