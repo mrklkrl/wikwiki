@@ -56,6 +56,18 @@ document.addEventListener("DOMContentLoaded", function() {
             leftIframe.srcdoc = leftContent;
             rightIframe.srcdoc = rightContent;
 
+            // Disable links in the target iframe
+            leftIframe.onload = function() {
+                const leftDoc = leftIframe.contentDocument || leftIframe.contentWindow.document;
+                if (leftDoc) {
+                    const links = leftDoc.getElementsByTagName('a');
+                    for (let link of links) {
+                        link.style.pointerEvents = 'none';
+                        link.style.cursor = 'default';
+                    }
+                }
+            };
+
             // Update the instructions with the page titles
             targetPageButton.textContent = targetTitle;
             startPageButton.textContent = rightTitle;
