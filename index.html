@@ -16,7 +16,7 @@
         #header {
             width: 100%;
             text-align: center;
-            padding: 20px 0;
+            padding: 20px 10px;
             background-color: #f8f8f8;
             border-bottom: 1px solid #ccc;
         }
@@ -28,6 +28,7 @@
             display: flex;
             width: 100%;
             height: calc(100vh - 92px);
+            flex-direction: row;
         }
         #path-container {
             width: 20%;
@@ -38,11 +39,33 @@
         #game-container {
             width: 80%;
             display: flex;
+            flex-direction: row;
+            overflow-y: auto;
         }
         iframe {
             width: 50%;
             height: 100%;
             border: none;
+        }
+        @media (max-width: 768px) {
+            #main {
+                flex-direction: column;
+            }
+            #path-container {
+                width: 100%;
+                height: 20%;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+            }
+            #game-container {
+                width: 100%;
+                height: 80%;
+                flex-direction: column;
+            }
+            iframe {
+                width: 100%;
+                height: 50%;
+            }
         }
     </style>
 </head>
@@ -50,7 +73,7 @@
     <div id="header">
         <h1>Wikipedia Path Game</h1>
         <div id="rules">
-            Reach the "<span id="target-page"></span>" page by clicking links on the "<span id="start-page"></span>" page. Your score is the number of clicks.
+            Reach the <span id="target-page"></span> page by clicking links on the <span id="start-page"></span> page. Your score is the number of clicks.
         </div>
     </div>
     <div id="main">
