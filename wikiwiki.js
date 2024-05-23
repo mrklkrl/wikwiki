@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let targetTitle = '';
     
     const wikiApiUrl = 'https://en.wikipedia.org/w/api.php';
-    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const corsProxy = 'https://corsproxy.io/?';
     const wikiBaseUrl = 'https://en.wikipedia.org';
 
     // Function to fetch random Wikipedia article title from a specific category
