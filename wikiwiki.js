@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pathDiv = document.getElementById('path');
     const targetPageButton = document.getElementById('target-page-button');
     const startPageButton = document.getElementById('start-page-button');
+    const scoreElement = document.getElementById('score');
     
     let path = [];
     let clickCount = 0;
@@ -41,6 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
         return content.replace(/src="\/\//g, `src="https://`);
     }
 
+    // Function to set iframe content with fallback for Safari
+    function setIframeContent(iframe, content) {
+        if ('srcdoc' in iframe) {
+            iframe.srcdoc = content;
+        } else {
+            iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(content);
+        }
+    }
+
     // Load initial pages
     Promise.all([fetchRandomArticleTitle(), fetchRandomArticleTitle(), fetchStyles()])
         .then(async ([leftTitle, rightTitle, styles]) => {
@@ -53,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function() {
             leftContent = styles + fixImageUrls(leftContent);
             rightContent = styles + fixImageUrls(rightContent);
 
-            leftIframe.srcdoc = leftContent;
-            rightIframe.srcdoc = rightContent;
+            setIframeContent(leftIframe, leftContent);
+            setIframeContent(rightIframe, rightContent);
 
             // Disable links in the target iframe
             leftIframe.onload = function() {
@@ -96,15 +106,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 let newContent = await fetchPageContent(newTitle);
                 newContent = fixImageUrls(newContent);
                 
-                rightIframe.srcdoc = newContent;
+                setIframeContent(rightIframe, newContent);
                 
                 path.push(newTitle);
                 clickCount++;
+                updateScore();
                 updatePath();
                 checkWinCondition(newTitle);
             }
         });
     });
+
+    function updateScore() {
+        scoreElement.textContent = clickCount;
+    }
 
     function updatePath() {
         pathDiv.innerHTML = path.map((title, index) => 

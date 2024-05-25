@@ -56,15 +56,16 @@
         <div class="row mt-3">
             <div class="col text-center">
                 <h1>Wikipedia Path Game</h1>
-                <p>Reach this page:</p>
+                <p>Reach this page</p>
                 <button id="target-page-button" class="btn btn-primary mb-3" data-toggle="collapse" data-target="#left-iframe-container" aria-expanded="false" aria-controls="left-iframe-container"></button>
-                <p>by clicking links in this page:</p>
+                <p>by clicking links in this page</p>
                 <button id="start-page-button" class="btn btn-primary mb-3" data-toggle="collapse" data-target="#right-iframe-container" aria-expanded="false" aria-controls="right-iframe-container"></button>
                 <p>Your score is the number of clicks.</p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4 path-container">
+                <h2>Score: <span id="score">0</span></h2>
                 <h2>Path</h2>
                 <div id="path"></div>
             </div>
@@ -101,6 +102,15 @@
                 pathMobile.style.display = 'none';
             }
         }
+
+        // Ensure only one iframe is expanded at a time
+        $('#left-iframe-container').on('show.bs.collapse', function () {
+            $('#right-iframe-container').collapse('hide');
+        });
+
+        $('#right-iframe-container').on('show.bs.collapse', function () {
+            $('#left-iframe-container').collapse('hide');
+        });
     </script>
 </body>
 </html>
